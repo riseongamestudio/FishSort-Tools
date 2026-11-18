@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hướng dẫn – Fish Sort Level Editor</title>
+  <style>
+    :root { --bg: #14161d; --panel: #1d2029; --fg: #cfd6e4; --dim: #8e97a8; --accent: #5fb4ff; --warn: #ffd166; --err: #ff6b6b; --ok: #7bd88f; }
+    html { background: var(--bg); }
+    body { margin: 0; padding: 32px 16px 64px; background: var(--bg); color: var(--fg); font: 15px/1.65 system-ui, "Segoe UI", sans-serif; }
+    main { max-width: 760px; margin: 0 auto; }
+    h1 { font-size: 26px; margin: 0 0 4px; }
+    h2 { font-size: 19px; margin: 36px 0 8px; padding-top: 12px; border-top: 1px solid #2a2f3c; }
+    h3 { font-size: 16px; margin: 20px 0 4px; }
+    p, li { margin: 6px 0; }
+    a { color: var(--accent); }
+    .lead { color: var(--dim); margin-bottom: 20px; }
+    nav { background: var(--panel); border-radius: 8px; padding: 10px 16px; }
+    nav ol { margin: 0; padding-left: 20px; columns: 2; }
+    kbd, .btn { display: inline-block; padding: 0 6px; border: 1px solid #3a4152; border-radius: 4px; background: #232733; font: 13px/1.6 system-ui, sans-serif; white-space: nowrap; }
+    table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+    td, th { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid #2a2f3c; }
+    th { color: var(--dim); font-weight: 600; }
+    .note { background: var(--panel); border-left: 3px solid var(--warn); padding: 8px 12px; border-radius: 4px; }
+    .err { color: var(--err); } .warn { color: var(--warn); } .ok { color: var(--ok); }
+    @media (max-width: 560px) { nav ol { columns: 1; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Fish Sort Level Editor</h1>
+  <p class="lead">Hướng dẫn cho người xếp level. Mở tool: <a href="./">riseongamestudio.github.io/FishSort-Tools</a> (máy tính, Chrome hoặc Edge).</p>
+
+  <nav><ol>
+    <li><a href="#sheet">Sheet level và đăng nhập</a></li>
+    <li><a href="#layout">Màn hình tool</a></li>
+    <li><a href="#list">Danh sách level, lưu, tải lại</a></li>
+    <li><a href="#map">Vẽ map: vòng nước, hộp, hầm, cầu</a></li>
+    <li><a href="#level">Bảng Level</a></li>
+    <li><a href="#box">Bảng Hộp</a></li>
+    <li><a href="#check">Bảng Kiểm tra</a></li>
+    <li><a href="#play">Chơi thử</a></li>
+    <li><a href="#game">Level vào game thế nào</a></li>
+  </ol></nav>
+
+  <h2 id="sheet">1. Sheet level và đăng nhập</h2>
+  <p>Mọi level nằm trong một Google Sheet cố định của dự án, <b>mỗi tab là một level</b>, thứ tự tab là thứ tự level trong game. Tool tự mở đúng sheet này, không cần dán link. Nút <span class="btn">Mở sheet</span> mở nó trong tab mới.</p>
+  <p><b>Xem và chơi thử</b> không cần đăng nhập. <b>Lưu và xoá</b> level thì tool hỏi đăng nhập Google: chọn tài khoản <b>có quyền sửa sheet</b> (nhờ chủ sheet chia sẻ quyền Editor nếu chưa có).</p>
+  <div class="note">Lần đầu đăng nhập, Google báo “Google chưa xác minh ứng dụng này”. Bấm <b>Nâng cao</b> rồi <b>Tiếp tục</b>, sau đó cho phép quyền Google Sheets. Đăng nhập giữ được khoảng một giờ; hết hạn thì lần lưu kế tiếp tool hỏi lại.</div>
+
+  <h2 id="layout">2. Màn hình tool</h2>
+  <table>
+    <tr><th>Vùng</th><th>Việc</th></tr>
+    <tr><td>Cột trái</td><td>Tên sheet, tài khoản đang đăng nhập, các nút tải/lưu, danh sách level.</td></tr>
+    <tr><td>Thanh trên</td><td>Công cụ vẽ map, <span class="btn">Hướng dẫn</span>, <span class="btn">Vừa khung</span>, <span class="btn">► Chơi thử</span>.</td></tr>
+    <tr><td>Giữa</td><td>Map đúng như trên điện thoại (khung dọc 9:19.5). Dải tối phía trên là chỗ <i>thanh cá trên nước</i>, phía dưới là chỗ <i>booster và banner</i>: đừng để hộp nằm dưới hai dải này.</td></tr>
+    <tr><td>Cột phải</td><td>Ba bảng <span class="btn">Level</span>, <span class="btn">Hộp</span>, <span class="btn">Kiểm tra</span>; dưới cùng nút lưu level đang mở.</td></tr>
+  </table>
+
+  <h2 id="list">3. Danh sách level, lưu, tải lại</h2>
+  <p>Mỗi dòng trong danh sách: chấm <span class="ok">xanh</span> (đúng mọi quy ước), <span class="warn">vàng</span> (có lưu ý), <span class="err">đỏ</span> (có lỗi); số thứ tự, tên tab, trạng thái, và <i>“chưa lưu”</i> nếu có thay đổi chưa đưa lên sheet.</p>
+  <table>
+    <tr><th>Nút</th><th>Việc</th></tr>
+    <tr><td><span class="btn">Level mới</span></td><td>Thêm một level trống ngay sau level đang chọn.</td></tr>
+    <tr><td><span class="btn">Nhân bản</span></td><td>Chép level đang chọn thành một level mới ngay sau nó.</td></tr>
+    <tr><td><span class="btn">Xoá</span></td><td>Bấm hai lần (lần đầu nút đổi thành “Bấm lại để xoá”). Xoá luôn tab trên sheet. Tool chỉ xoá tab là level, không đụng tab khác.</td></tr>
+    <tr><td><span class="btn">Lưu level này lên sheet</span></td><td>Ở cuối cột phải; màu cam khi có thay đổi chưa lưu. Level mới thành tab mới ngay sau tab của level trước nó.</td></tr>
+    <tr><td><span class="btn">Lưu tất cả</span></td><td>Lưu mọi level đang “chưa lưu”.</td></tr>
+    <tr><td><span class="btn">Tải lại</span></td><td>Đọc lại sheet. Nếu còn level chưa lưu, nút đổi thành “Bỏ thay đổi, tải lại?”, bấm lần nữa mới tải (thay đổi chưa lưu mất).</td></tr>
+  </table>
+  <p><b>Đổi thứ tự level</b>: kéo tab trong Google Sheet, rồi bấm <span class="btn">Tải lại</span>.</p>
+  <p><b>Hoàn tác</b>: <kbd>Ctrl</kbd>+<kbd>Z</kbd>, từng bước, riêng cho từng level.</p>
+
+  <h2 id="map">4. Vẽ map</h2>
+  <h3>Công cụ</h3>
+  <table>
+    <tr><th>Công cụ</th><th>Cách dùng</th></tr>
+    <tr><td><span class="btn">Chọn, kéo</span></td><td>Kéo điểm của vòng nước, kéo hộp, kéo <b>núm vàng</b> của hộp đang chọn để xoay. Bấm một hộp để mở nó ở bảng Hộp.</td></tr>
+    <tr><td><span class="btn">+ Điểm vòng</span></td><td>Bấm gần vòng nước để chèn một điểm vào đoạn gần nhất.</td></tr>
+    <tr><td><span class="btn">+ Hộp</span></td><td>Bấm chỗ trống để đặt hộp; miệng hộp tự quay về dòng nước gần nhất.</td></tr>
+    <tr><td><span class="btn">Hầm</span></td><td>Bấm điểm đầu rồi điểm cuối của hầm, theo chiều nước chảy. Cá đi qua đoạn trong hầm thì bị che.</td></tr>
+  </table>
+  <h3>Chuột và phím</h3>
+  <table>
+    <tr><td>Chuột phải</td><td>Xoá điểm hoặc hộp dưới chuột.</td></tr>
+    <tr><td>Giữ chuột phải ở chỗ trống</td><td>Kéo màn hình.</td></tr>
+    <tr><td>Lăn chuột</td><td>Phóng to, thu nhỏ. <span class="btn">Vừa khung</span> đưa về khung như trên điện thoại.</td></tr>
+    <tr><td><kbd>Alt</kbd> khi kéo</td><td>Bỏ bắt lưới (bình thường điểm và hộp bắt theo lưới, góc xoay bắt theo 15°).</td></tr>
+    <tr><td><kbd>Delete</kbd></td><td>Xoá hộp hoặc điểm đang chọn (vòng nước giữ tối thiểu 3 điểm).</td></tr>
+  </table>
+  <h3>Vòng nước, cầu</h3>
+  <p>Các điểm đánh số theo chiều nước chảy. Chỗ hai đoạn nước cắt nhau là <b>cầu</b> (chấm xanh, ghi “Cầu n”): <b>bấm vào để đổi đoạn nào nằm trên</b>.</p>
+  <p>Hộp nối ra vòng nước bằng một ống từ miệng hộp. Ống không chạm được vòng nước thì hiện <b>vạch đỏ</b> ở miệng hộp: xoay miệng hộp về phía dòng nước.</p>
+
+  <h2 id="level">5. Bảng Level</h2>
+  <table>
+    <tr><td>Tên tab</td><td>Tên tab trên sheet. Trùng tên tab khác thì tool thêm số vào sau.</td></tr>
+    <tr><td>Trạng thái</td><td><b>Nháp</b> đang làm, <b>Xong</b> đã chốt, <b>Bỏ</b> không dùng (không vào game).</td></tr>
+    <tr><td>Ghi chú</td><td>Ghi chú tự do, lưu trên sheet.</td></tr>
+    <tr><td>Cá trên nước tối đa</td><td>Số cá dòng nước chứa cùng lúc (nút − +). Cá ra thêm khi dòng đã đầy thì xếp hàng chờ ở ống.</td></tr>
+    <tr><td>Tóm tắt</td><td>Số hộp, sức chứa, số cá, số cá từng màu.</td></tr>
+  </table>
+  <h3>Gợi ý nội dung</h3>
+  <p>Xếp cá vào các hộp của map hiện tại sao cho <b>chắc chắn giải được</b>. Chọn <b>Số màu</b>, <b>Hộp trống</b>, <b>Độ trộn</b> (càng cao càng rối), rồi <span class="btn">Tạo nội dung</span>. Hộp giữ nguyên chỗ, sức chứa, khoá và cổng; chỉ cá được xếp lại. Bấm nhiều lần để ra nhiều phương án. Cá ẩn, phồng, ngủ thì thêm tay sau đó, rồi kiểm tra giải lại.</p>
+  <h3>Kiểm tra giải</h3>
+  <p><span class="btn">Kiểm tra giải</span> tìm một cách thắng, không dùng booster. Kết quả: giải được (kèm số lượt), không giải được, hoặc tìm quá lâu nên dừng. Sửa level xong thì kiểm tra lại.</p>
+
+  <h2 id="box">6. Bảng Hộp</h2>
+  <p>Bấm một hộp trên map để mở. Cá trong hộp liệt kê từ đáy lên, <b>dòng cuối là miệng hộp</b> (cặp ra trước).</p>
+  <table>
+    <tr><td>Sức chứa</td><td>Số cá hộp chứa (mỗi hàng 2 cá).</td></tr>
+    <tr><td>Hướng miệng</td><td>Xoay 90° hai chiều (hoặc kéo núm vàng trên map).</td></tr>
+    <tr><td>Icon</td><td>Hộp có icon chỉ nhận cá cùng icon; cá thêm vào hộp tự mang icon của hộp.</td></tr>
+    <tr><td>Cổng</td><td><b>Rong</b>: cá ra được nhưng không vào được, hết cá thì rong tan. <b>Vỏ sò</b>: nhận cá vào nhưng không bấm ra được, đầy một màu thì mở.</td></tr>
+    <tr><td>Khoá</td><td><b>Nắp</b>: mở sau khi xong số hộp chọn bên dưới. <b>Phủ</b>: mở khi xong một hộp màu chọn bên dưới (màu đó phải có trong level).</td></tr>
+    <tr><td>Từng cặp cá</td><td>Bấm ô tên màu để tô bằng màu đang chọn; <b>Ẩn</b> (dấu hỏi, ra khỏi hộp mới lộ màu); <b>Phồng</b> (chiếm chỗ 2 cá trên nước); <b>Ngủ n</b> (− +: sau n lượt bấm mới thức và ra được); <b>×</b> bỏ cặp.</td></tr>
+    <tr><td>Dưới danh sách</td><td><span class="btn">+ Thêm cặp …</span> thêm một cặp màu đang chọn lên miệng hộp; <span class="btn">Đổ hết cá</span>; <span class="btn">Xoá hộp này</span>.</td></tr>
+  </table>
+
+  <h2 id="check">7. Bảng Kiểm tra</h2>
+  <p>Tool kiểm map theo quy ước xếp map trong GDD mỗi khi có thay đổi. <span class="err">Lỗi</span> phải sửa trước khi chốt; <span class="warn">lưu ý</span> nên xem lại. Chỗ có vấn đề hiện vòng tròn đỏ hoặc vàng trên map; bấm một dòng có nhắc hộp để chọn hộp đó. Các nhóm kiểm:</p>
+  <ul>
+    <li>Cầu: hai đoạn cắt nhau gần vuông góc, hai cầu không sát nhau, cầu không nằm trên dốc cầu khác.</li>
+    <li>Ống và điểm nối: ống phải chạm vòng nước, không đè lên dòng, không quá dài; điểm nối không nằm trên/dưới cầu, không trong hầm; hai điểm nối đủ xa để thấy cá rẽ vào hộp nào.</li>
+    <li>Chồng chéo: hộp chạm hộp, hộp chạm dòng nước, ống cắt qua hộp khác, hai đoạn nước sát nhau.</li>
+    <li>Khúc cua: cua gắt quá thì tường lòng nước gập vào nhau. Kéo các điểm quanh khúc cua ra xa nhau hơn.</li>
+    <li>Độ dài vòng nước đủ cho số cá trên nước (cộng 2 chỗ của booster).</li>
+    <li>Kích thước chạm: hộp đủ to trên điện thoại (tính theo mm); map quá to thì hộp quá nhỏ.</li>
+    <li>Nội dung: số cá không quá sức chứa, nắp và tấm phủ có điều kiện mở hợp lệ.</li>
+  </ul>
+
+  <h2 id="play">8. Chơi thử</h2>
+  <p><span class="btn">► Chơi thử</span> chạy level y như trong game, khung điện thoại đứng giữa trang. Hết màn thì hiện Thắng hoặc Thua với nút <span class="btn">Chơi lại</span>; <span class="btn">◄ Quay lại sửa</span> trở về màn sửa.</p>
+
+  <h2 id="game">9. Level vào game thế nào</h2>
+  <p>Dev cập nhật level vào game từ sheet (một lệnh trong Unity): mọi tab level theo đúng thứ tự tab, <b>trừ tab trạng thái Bỏ</b>. Level còn Nháp, còn lỗi hoặc chưa giải được vẫn vào nhưng dev nhận báo cáo. Vì vậy chỉ đánh <b>Xong</b> khi level đã chốt.</p>
+  <p>Có thể sửa thẳng ô trong sheet, nhưng nên sửa bằng tool để map được kiểm và vẽ đúng. Tab không bắt đầu bằng ô A1 <i>“Fish Sort level”</i> không phải level, tool bỏ qua.</p>
+</main>
+</body>
+</html>
