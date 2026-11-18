@@ -3,8 +3,88 @@
 <head>
   <meta charset="utf-8">
   <title>FishSort Level Editor</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #14161d; color: #cfd6e4; font: 14px system-ui, sans-serif; }
+    #unity-canvas { width: 100%; height: 100%; display: block; background: #14161d; outline: none; }
+    #loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+    #bar { width: 260px; height: 6px; background: #2a2f3c; border-radius: 3px; overflow: hidden; }
+    #fill { width: 0; height: 100%; background: #5fb4ff; }
+  </style>
+  <script src="https://accounts.google.com/gsi/client" async></script>
 </head>
-<body style="background:#14161d;color:#cfd6e4;font:15px system-ui,sans-serif;padding:32px">
-  FishSort Level Editor – đang dựng. <a style="color:#5fb4ff" href="privacy.html">Privacy</a>
+<body>
+  <canvas id="unity-canvas" tabindex="-1"></canvas>
+  <div id="loading"><div>Đang tải Fish Sort Level Editor...</div><div id="bar"><div id="fill"></div></div></div>
+  <script>
+    // Google sign-in for writing the level sheet (Google Cloud project fishsort-tools). The token lives only in this page.
+    window.levelSheet = (function () {
+      var clientId = '258743446962-fkkksl3m4899v8ee0n9smvp6ham05349.apps.googleusercontent.com';
+      var scope = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/userinfo.email';
+      var token = '', expires = 0, account = '', client = null, waiting = null;
+
+      function finish(error, value) {
+        var w = waiting;
+        waiting = null;
+        if (!w) return;
+        if (error) w.reject(new Error(error)); else w.resolve(value);
+      }
+
+      function onToken(response) {
+        if (response.error) { finish(response.error_description || response.error); return; }
+        token = response.access_token;
+        // A minute early, so a request never leaves with a token about to lapse.
+        expires = Date.now() + (Number(response.expires_in) - 60) * 1000;
+        fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + token } })
+          .then(function (r) { return r.json(); })
+          .then(function (info) { account = info.email || ''; }, function () { })
+          .then(function () { finish(null, token); });
+      }
+
+      function ensureClient() {
+        if (client) return client;
+        if (!(window.google && google.accounts && google.accounts.oauth2)) throw new Error('đăng nhập Google chưa tải xong, thử lại sau giây lát');
+        client = google.accounts.oauth2.initTokenClient({
+          client_id: clientId,
+          scope: scope,
+          callback: onToken,
+          error_callback: function (e) { finish(e && e.type === 'popup_closed' ? 'đã đóng cửa sổ đăng nhập' : (e && (e.message || e.type)) || 'lỗi'); },
+        });
+        return client;
+      }
+
+      return {
+        token: function () { return Date.now() < expires ? token : ''; },
+        account: function () { return Date.now() < expires ? account : ''; },
+        signIn: function () {
+          return new Promise(function (resolve, reject) {
+            if (waiting) finish('đã hỏi đăng nhập lại');
+            waiting = { resolve: resolve, reject: reject };
+            try { ensureClient().requestAccessToken(account ? { prompt: '', login_hint: account } : { prompt: 'select_account' }); }
+            catch (e) { finish(e.message); }
+          });
+        },
+        signOut: function () { token = ''; expires = 0; },
+      };
+    })();
+  </script>
+  <script src="Build/LevelEditorWeb.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector('#unity-canvas'), {
+      dataUrl: 'Build/LevelEditorWeb.data.unityweb',
+      frameworkUrl: 'Build/LevelEditorWeb.framework.js.unityweb',
+      codeUrl: 'Build/LevelEditorWeb.wasm.unityweb',
+      streamingAssetsUrl: 'StreamingAssets',
+      companyName: "RiseOn",
+      productName: "FishSort Level Editor",
+      productVersion: "1.0",
+      matchWebGLCanvasToContainer: false,
+    }, function (progress) {
+      document.querySelector('#fill').style.width = Math.round(progress * 100) + '%';
+    }).then(function () {
+      document.querySelector('#loading').remove();
+    }).catch(function (message) {
+      document.querySelector('#loading').textContent = 'Không tải được: ' + message;
+    });
+  </script>
 </body>
 </html>
