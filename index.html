@@ -17,11 +17,22 @@
   <canvas id="unity-canvas" tabindex="-1"></canvas>
   <div id="loading"><div id="what">Đang tải Fish Sort Level Editor...</div><div id="bar"><div id="fill"></div></div><a href="guide.html" target="_blank">Hướng dẫn sử dụng</a></div>
   <script>
-    // Google sign-in for writing the level sheet (Google Cloud project fishsort-tools). The token lives only in this page.
+    // Google sign-in for writing the level sheet (Google Cloud project fishsort-tools). The token and the account are kept in
+    // this browser's storage, so a reload or a new tab stays signed in until the token lapses (an hour); then the account is
+    // asked again without its picker, and Google's window closes by itself.
     window.levelSheet = (function () {
       var clientId = '258743446962-fkkksl3m4899v8ee0n9smvp6ham05349.apps.googleusercontent.com';
       var scope = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/userinfo.email';
+      var storageKey = 'fishsort.levelSheet.google';
       var token = '', expires = 0, account = '', client = null, waiting = null;
+      try {
+        var saved = JSON.parse(localStorage.getItem(storageKey) || 'null');
+        if (saved) { token = saved.token || ''; expires = Number(saved.expires) || 0; account = saved.account || ''; }
+      } catch (e) { }
+
+      function keep() {
+        try { localStorage.setItem(storageKey, JSON.stringify({ token: token, expires: expires, account: account })); } catch (e) { }
+      }
 
       function finish(error, value) {
         var w = waiting;
@@ -37,8 +48,8 @@
         expires = Date.now() + (Number(response.expires_in) - 60) * 1000;
         fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: { Authorization: 'Bearer ' + token } })
           .then(function (r) { return r.json(); })
-          .then(function (info) { account = info.email || ''; }, function () { })
-          .then(function () { finish(null, token); });
+          .then(function (info) { account = info.email || account; }, function () { })
+          .then(function () { keep(); finish(null, token); });
       }
 
       function ensureClient() {
@@ -55,7 +66,8 @@
 
       return {
         token: function () { return Date.now() < expires ? token : ''; },
-        account: function () { return Date.now() < expires ? account : ''; },
+        // The account last signed in, even once its token has lapsed.
+        account: function () { return account; },
         signIn: function () {
           return new Promise(function (resolve, reject) {
             if (waiting) finish('đã hỏi đăng nhập lại');
@@ -64,7 +76,13 @@
             catch (e) { finish(e.message); }
           });
         },
-        signOut: function () { token = ''; expires = 0; },
+        // The token no longer works: the next sign-in asks for a new one for the same account.
+        dropToken: function () { token = ''; expires = 0; keep(); },
+        signOut: function () {
+          if (token && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(token, function () { });
+          token = ''; expires = 0; account = '';
+          try { localStorage.removeItem(storageKey); } catch (e) { }
+        },
       };
     })();
   </script>

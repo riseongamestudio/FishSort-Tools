@@ -45,13 +45,13 @@
 
   <h2 id="sheet">1. Sheet level và đăng nhập</h2>
   <p>Mọi level nằm trong một Google Sheet cố định của dự án, <b>mỗi tab là một level</b>, thứ tự tab là thứ tự level trong game. Tool tự mở đúng sheet này, không cần dán link. Nút <span class="btn">Mở sheet</span> mở nó trong tab mới.</p>
-  <p><b>Xem và chơi thử</b> không cần đăng nhập. <b>Lưu và xoá</b> level thì tool hỏi đăng nhập Google: chọn tài khoản <b>có quyền sửa sheet</b> (nhờ chủ sheet chia sẻ quyền Editor nếu chưa có).</p>
-  <div class="note">Lần đầu đăng nhập, Google báo “Google chưa xác minh ứng dụng này”. Bấm <b>Nâng cao</b> rồi <b>Tiếp tục</b>, sau đó cho phép quyền Google Sheets. Đăng nhập giữ được khoảng một giờ; hết hạn thì lần lưu kế tiếp tool hỏi lại.</div>
+  <p><b>Xem và chơi thử</b> không cần đăng nhập. <b>Lưu và xoá</b> level cần đăng nhập Google bằng tài khoản <b>có quyền sửa sheet</b> (nhờ chủ sheet chia sẻ quyền Editor nếu chưa có). Ô trạng thái ở đầu cột trái cho biết đang đăng nhập tài khoản nào, kèm nút <b>Đăng nhập</b> / <b>Đăng xuất</b>; chưa đăng nhập thì lần lưu đầu tiên cũng tự hỏi.</p>
+  <div class="note">Lần đầu đăng nhập, Google báo “Google chưa xác minh ứng dụng này”. Bấm <b>Nâng cao</b> rồi <b>Tiếp tục</b>, sau đó cho phép quyền Google Sheets. Chỉ cần đăng nhập một lần trên trình duyệt này: tải lại trang hay mở tab mới vẫn giữ đăng nhập. Mỗi giờ Google bắt gia hạn một lần; tool tự gia hạn ở lần lưu kế tiếp, cửa sổ Google hiện thoáng qua rồi tự đóng, không phải chọn lại tài khoản. Máy dùng chung thì bấm <b>Đăng xuất</b> khi xong.</div>
 
   <h2 id="layout">2. Màn hình tool</h2>
   <table>
     <tr><th>Vùng</th><th>Việc</th></tr>
-    <tr><td>Cột trái</td><td>Tên sheet, tài khoản đang đăng nhập, các nút tải/lưu, danh sách level.</td></tr>
+    <tr><td>Cột trái</td><td>Tên sheet, ô trạng thái đăng nhập Google (chấm xanh: đã đăng nhập; vàng: hết phiên, lần lưu tới tự gia hạn; đỏ: chưa đăng nhập), các nút tải/lưu, danh sách level.</td></tr>
     <tr><td>Thanh trên</td><td>Công cụ vẽ map, <span class="btn">Hướng dẫn</span>, <span class="btn">Vừa khung</span>, <span class="btn">► Chơi thử</span>.</td></tr>
     <tr><td>Giữa</td><td>Map, phủ hết khoảng giữa hai cột.</td></tr>
     <tr><td>Cột phải</td><td>Ba bảng <span class="btn">Level</span>, <span class="btn">Hộp</span>, <span class="btn">Kiểm tra</span>; dưới cùng nút lưu level đang mở.</td></tr>
@@ -61,7 +61,7 @@
   <p>Mỗi dòng trong danh sách: chấm <span class="ok">xanh</span> (đúng mọi quy ước), <span class="warn">vàng</span> (có lưu ý), <span class="err">đỏ</span> (có lỗi); số thứ tự, tên tab, trạng thái, và <i>“chưa lưu”</i> nếu có thay đổi chưa đưa lên sheet.</p>
   <table>
     <tr><th>Nút</th><th>Việc</th></tr>
-    <tr><td><span class="btn">Level mới</span></td><td>Thêm một level trống ngay sau level đang chọn.</td></tr>
+    <tr><td><span class="btn">Level mới</span></td><td>Thêm một level trống (chưa có hộp, chưa có dòng nước) ngay sau level đang chọn, và bật sẵn <span class="btn">Vẽ dòng</span>.</td></tr>
     <tr><td><span class="btn">Nhân bản</span></td><td>Chép level đang chọn thành một level mới ngay sau nó.</td></tr>
     <tr><td><span class="btn">Xoá</span></td><td>Bấm hai lần (lần đầu nút đổi thành “Bấm lại để xoá”). Xoá luôn tab trên sheet. Tool chỉ xoá tab là level, không đụng tab khác.</td></tr>
     <tr><td><span class="btn">Lưu level này lên sheet</span></td><td>Ở cuối cột phải; màu cam khi có thay đổi chưa lưu. Level mới thành tab mới ngay sau tab của level trước nó.</td></tr>
@@ -75,8 +75,9 @@
   <h3>Công cụ</h3>
   <table>
     <tr><th>Công cụ</th><th>Cách dùng</th></tr>
-    <tr><td><span class="btn">Chọn, kéo</span></td><td>Kéo điểm của vòng nước, kéo hộp, kéo <b>núm vàng</b> của hộp đang chọn để xoay hộp theo góc bất kỳ, dừng nhẹ ở các góc chẵn 15°. Bấm một hộp để mở nó ở bảng Hộp.</td></tr>
-    <tr><td><span class="btn">Vẽ dòng</span></td><td>Giữ chuột kéo một vòng theo chiều nước chảy, như vẽ trên Paint. Thả chuột là thành vòng nước mới, tự nối kín về chỗ bắt đầu. Vòng cũ, hầm và lựa chọn cầu của nó bị thay.</td></tr>
+    <tr><td><span class="btn">Chọn, kéo</span></td><td>Kéo điểm của vòng nước, kéo hộp, kéo <b>núm vàng</b> của hộp đang chọn để xoay hộp theo góc bất kỳ, dừng nhẹ ở các góc chẵn 15°. Bấm một hộp để mở nó ở bảng Hộp. Điểm vòng đang chọn có <b>hai tay nắm</b> như Pen Tool của Photoshop: kéo một đầu để uốn đường cong, đầu kia đối xứng theo; giữ <kbd>Alt</kbd> khi kéo để bẻ góc (hai đầu đi riêng). Nút <span class="btn">Tay nắm tự động</span> cạnh ô toạ độ trả điểm về đường cong tự động.</td></tr>
+    <tr><td><span class="btn">Vẽ dòng</span></td><td>Giữ chuột kéo theo chiều nước chảy, như vẽ trên Paint: dòng nước hiện tới đâu theo chuột tới đó. Thả chuột thì nét dừng lại; bấm vào đuôi nét để vẽ tiếp, bấm chỗ khác để vẽ lại từ đầu. Tool không tự nối: kéo đuôi về chạm <b>vòng tròn ở điểm đầu</b> (hiện xanh khi nét đủ dài) là khép thành vòng nước. Vòng cũ, hầm và lựa chọn cầu của nó bị thay.</td></tr>
+    <tr><td><span class="btn">Xoá dòng nước</span></td><td>Xoá cả vòng nước (cùng hầm, cầu) để vẽ lại từ đầu; hộp giữ nguyên, hiện bằng khung viền cho tới khi có vòng nước mới. Ctrl+Z để lấy lại.</td></tr>
     <tr><td><span class="btn">+ Điểm vòng</span></td><td>Bấm gần vòng nước để chèn một điểm vào đoạn gần nhất.</td></tr>
     <tr><td><span class="btn">+ Hộp</span></td><td>Bấm chỗ trống để đặt hộp; miệng hộp tự quay về dòng nước gần nhất.</td></tr>
     <tr><td><span class="btn">Hầm</span></td><td>Bấm điểm đầu rồi điểm cuối của hầm, theo chiều nước chảy. Hai đầu hầm là hai miệng ống; đoạn giữa đi ngầm dưới đáy biển, cá lặn vào miệng đầu và trồi lên ở miệng cuối.</td></tr>
@@ -85,8 +86,8 @@
   <table>
     <tr><td>Chuột phải</td><td>Xoá điểm hoặc hộp dưới chuột.</td></tr>
     <tr><td>Giữ chuột phải ở chỗ trống</td><td>Kéo màn hình.</td></tr>
-    <tr><td>Lăn chuột</td><td>Phóng to, thu nhỏ. <span class="btn">Vừa khung</span> đưa cả map vừa vào khoảng giữa.</td></tr>
-    <tr><td><kbd>Alt</kbd> khi kéo</td><td>Bỏ bắt lưới (bình thường điểm và hộp bắt theo lưới) và bỏ chỗ dừng ở góc chẵn khi xoay.</td></tr>
+    <tr><td>Lăn chuột, <kbd>Alt</kbd> + <kbd>−</kbd> / <kbd>Alt</kbd> + <kbd>=</kbd></td><td>Thu nhỏ, phóng to. <span class="btn">Vừa khung</span> đưa cả map vừa vào khoảng giữa.</td></tr>
+    <tr><td><kbd>Alt</kbd> khi kéo</td><td>Bỏ bắt lưới (bình thường điểm và hộp bắt theo lưới) và bỏ chỗ dừng ở góc chẵn khi xoay; khi kéo tay nắm của điểm thì bẻ góc.</td></tr>
     <tr><td><kbd>Delete</kbd></td><td>Xoá hộp hoặc điểm đang chọn (vòng nước giữ tối thiểu 3 điểm).</td></tr>
   </table>
   <h3>Vòng nước, cầu</h3>
