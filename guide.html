@@ -75,20 +75,22 @@
   <h3>Công cụ</h3>
   <table>
     <tr><th>Công cụ</th><th>Cách dùng</th></tr>
-    <tr><td><span class="btn">Chọn, kéo</span></td><td>Kéo điểm của vòng nước, kéo hộp, kéo <b>núm vàng</b> của hộp đang chọn để xoay. Bấm một hộp để mở nó ở bảng Hộp.</td></tr>
+    <tr><td><span class="btn">Chọn, kéo</span></td><td>Kéo điểm của vòng nước, kéo hộp, kéo <b>núm vàng</b> của hộp đang chọn để xoay hộp theo góc bất kỳ, dừng nhẹ ở các góc chẵn 15°. Bấm một hộp để mở nó ở bảng Hộp.</td></tr>
+    <tr><td><span class="btn">Vẽ dòng</span></td><td>Giữ chuột kéo một vòng theo chiều nước chảy, như vẽ trên Paint. Thả chuột là thành vòng nước mới, tự nối kín về chỗ bắt đầu. Vòng cũ, hầm và lựa chọn cầu của nó bị thay.</td></tr>
     <tr><td><span class="btn">+ Điểm vòng</span></td><td>Bấm gần vòng nước để chèn một điểm vào đoạn gần nhất.</td></tr>
     <tr><td><span class="btn">+ Hộp</span></td><td>Bấm chỗ trống để đặt hộp; miệng hộp tự quay về dòng nước gần nhất.</td></tr>
-    <tr><td><span class="btn">Hầm</span></td><td>Bấm điểm đầu rồi điểm cuối của hầm, theo chiều nước chảy. Cá đi qua đoạn trong hầm thì bị che.</td></tr>
+    <tr><td><span class="btn">Hầm</span></td><td>Bấm điểm đầu rồi điểm cuối của hầm, theo chiều nước chảy. Hai đầu hầm là hai miệng ống; đoạn giữa đi ngầm dưới đáy biển, cá lặn vào miệng đầu và trồi lên ở miệng cuối.</td></tr>
   </table>
   <h3>Chuột và phím</h3>
   <table>
     <tr><td>Chuột phải</td><td>Xoá điểm hoặc hộp dưới chuột.</td></tr>
     <tr><td>Giữ chuột phải ở chỗ trống</td><td>Kéo màn hình.</td></tr>
     <tr><td>Lăn chuột</td><td>Phóng to, thu nhỏ. <span class="btn">Vừa khung</span> đưa cả map vừa vào khoảng giữa.</td></tr>
-    <tr><td><kbd>Alt</kbd> khi kéo</td><td>Bỏ bắt lưới (bình thường điểm và hộp bắt theo lưới, góc xoay bắt theo 15°).</td></tr>
+    <tr><td><kbd>Alt</kbd> khi kéo</td><td>Bỏ bắt lưới (bình thường điểm và hộp bắt theo lưới) và bỏ chỗ dừng ở góc chẵn khi xoay.</td></tr>
     <tr><td><kbd>Delete</kbd></td><td>Xoá hộp hoặc điểm đang chọn (vòng nước giữ tối thiểu 3 điểm).</td></tr>
   </table>
   <h3>Vòng nước, cầu</h3>
+  <p>Bấm một điểm thì ô <b>X, Z</b> của nó hiện trên đầu cột phải: gõ số để đặt toạ độ tròn. Bảng Hộp cũng có ô tâm X, Z và hướng miệng.</p>
   <p>Các điểm đánh số theo chiều nước chảy. Chỗ hai đoạn nước cắt nhau là <b>cầu</b> (chấm xanh, ghi “Cầu n”): <b>bấm vào để đổi đoạn nào nằm trên</b>.</p>
   <p>Hộp nối ra vòng nước bằng một ống từ miệng hộp. Ống không chạm được vòng nước thì hiện <b>vạch đỏ</b> ở miệng hộp: xoay miệng hộp về phía dòng nước.</p>
 
@@ -130,7 +132,7 @@
   </ul>
 
   <h2 id="play">8. Chơi thử</h2>
-  <p><span class="btn">► Chơi thử</span> chạy level y như trong game, khung điện thoại đứng giữa trang. Nút tạm dừng chỉ có Tiếp tục và Chơi lại. Hết màn thì hiện Thắng hoặc Thua với nút <span class="btn">Chơi lại</span>; <span class="btn">◄ Quay lại sửa</span> trở về màn sửa.</p>
+  <p><span class="btn">► Chơi thử</span> chạy level y như trong game, khung điện thoại đứng giữa trang. Không có nút tạm dừng của game: <span class="btn">Chơi lại</span> chơi lại từ đầu bất cứ lúc nào, <span class="btn">◄ Quay lại sửa</span> trở về màn sửa. Hết màn thì hiện Thắng hoặc Thua.</p>
 
   <h2 id="game">9. Level vào game thế nào</h2>
   <p>Dev cập nhật level vào game từ sheet (một lệnh trong Unity): mọi tab level theo đúng thứ tự tab, <b>trừ tab trạng thái Bỏ</b>. Level còn Nháp, còn lỗi hoặc chưa giải được vẫn vào nhưng dev nhận báo cáo. Vì vậy chỉ đánh <b>Xong</b> khi level đã chốt.</p>
