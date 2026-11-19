@@ -103,9 +103,6 @@
       productName: "FishSort Level Editor",
       productVersion: "1.0",
       matchWebGLCanvasToContainer: false,
-      // One canvas pixel per page pixel: at the page's own ratio Unity draws the scene and its immediate-mode GUI at different
-      // scales, and the map's lines leave the board they trace.
-      devicePixelRatio: 1,
     }, function (progress) {
       document.querySelector('#fill').style.width = Math.round(progress * 100) + '%';
     }).then(function () {
