@@ -16,6 +16,7 @@
     <type fullname="RiseOn.FishSort.PopupShop" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupStreak" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupUnlock" preserve="all" />
+    <type fullname="RiseOn.FishSort.PopupWheel" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupWin" preserve="all" />
     <type fullname="RiseOn.FishSort.RewardRow" preserve="all" />
     <type fullname="RiseOn.FishSort.SafeArea" preserve="all" />
@@ -35,12 +36,16 @@
     <type fullname="RiseOn.FishSort.UiShine" preserve="all" />
     <type fullname="RiseOn.FishSort.UiSpin" preserve="all" />
     <type fullname="RiseOn.FishSort.UiToggle" preserve="all" />
+    <type fullname="RiseOn.FishSort.WheelPointer" preserve="all" />
+    <type fullname="RiseOn.FishSort.WheelSectors" preserve="all" />
+    <type fullname="RiseOn.FishSort.WheelView" preserve="all" />
     <type fullname="RiseOn.FishSort.BoosterButton" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupCollection/Card" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupDailyReward/Tile" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupMissions/Row" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupSettings/Switch" preserve="nothing" serialized="true" />
-    <type fullname="RiseOn.FishSort.PopupShop/Row" preserve="nothing" serialized="true" />
+    <type fullname="RiseOn.FishSort.PopupShop/Offer" preserve="nothing" serialized="true" />
+    <type fullname="RiseOn.FishSort.PopupShop/Part" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupStreak/Row" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.RewardRow/Chip" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.ScreenHome/SideButton" preserve="nothing" serialized="true" />
