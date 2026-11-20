@@ -12,6 +12,7 @@
     h1 { font-size: 26px; margin: 0 0 4px; }
     h2 { font-size: 19px; margin: 36px 0 8px; padding-top: 12px; border-top: 1px solid #2a2f3c; }
     h3 { font-size: 16px; margin: 20px 0 4px; }
+    h4 { font-size: 15px; margin: 16px 0 4px; color: var(--accent); }
     p, li { margin: 6px 0; }
     a { color: var(--accent); }
     .lead { color: var(--dim); margin-bottom: 20px; }
@@ -134,18 +135,48 @@
   </ul>
 
   <h3>Độ khó</h3>
-  <p>Ngay dưới danh sách kiểm, tool tính level khó tới đâu và khó ở chỗ nào, theo luật chơi và không dùng booster. Sửa level xong chừng nửa giây là tool tự tính lại; số liệu hiện dần trong lúc tính, không cần bấm gì. Khi đang chơi thử thì tạm dừng tính.</p>
-  <p>Tool cho các "người chơi mẫu" chơi đi chơi lại level. Mỗi người chơi mẫu thắng thì dừng; thua thì chơi lại, nhớ những con cá đen đã thấy màu và nước đi đã làm mình thua. Vì vậy cá đen chỉ tốn vài lần chơi để nhớ, không phải lần nào cũng đoán mò.</p>
+  <p>Ngay dưới danh sách kiểm, tool tính level khó tới đâu, khó ở lượt nào, hộp nào, vì sao, theo luật chơi và không dùng booster. Sửa level xong chừng nửa giây là tool tự tính lại; số liệu hiện dần trong lúc tính. Khi đang chơi thử thì tạm dừng tính.</p>
+
+  <h4>Thế nào là khó</h4>
+  <p>Level khó là level người chơi dễ thua. Tool đo bằng <b>xác suất thắng ngay lần đầu</b> của một người chơi mẫu, và <b>số lần chơi trung bình tới khi thắng</b>. Người chơi chỉ thua khi bấm vào một <b>bẫy</b>: nước làm level không còn đường thắng nào nữa (tool chứng minh bằng cách duyệt hết mọi nước đi sau đó). Vậy độ khó đến từ:</p>
+  <ul>
+    <li><b>Số bẫy so với số nước hợp lệ ở mỗi lượt.</b> Lượt có 1 nước đúng trong 5 nước khó hơn lượt có 4 nước đúng trong 5.</li>
+    <li><b>Bẫy lộ ra sớm hay muộn.</b> Bẫy thua ngay thì người chơi nhìn trước 1 lượt là tránh được. Bẫy chỉ lộ ra sau vài lượt thì phải nhìn xa mới tránh được, nên chặn cả người chơi cẩn thận.</li>
+    <li><b>Số lượt.</b> Mỗi lượt có bẫy là một lần có thể thua; nhiều lượt như vậy thì xác suất thua cộng dồn.</li>
+    <li><b>Những gì chưa thấy.</b> Cá đen và cá dưới nắp, tấm phủ: lần đầu người chơi phải đoán; thua một lần thì đã thấy, các lần sau không phải đoán nữa. Một con cá ẩn chỉ tốn lượt khi nó tạo ra <b>ngã rẽ mù</b>: chỗ mà nước đúng tùy vào màu chưa thấy. Cá ẩn không làm đổi cách đi thì không tốn lượt nào.</li>
+    <li><b>Nước chật.</b> Nước càng ít chỗ trống thì càng nhiều nước đi thành bẫy.</li>
+  </ul>
+
+  <h4>Công thức</h4>
+  <p>Ở mỗi lượt, xác suất người chơi bấm vào bẫy là</p>
+  <p class="note"><b>r</b> = s × (số bẫy ÷ số nước hợp lệ) + (1 − s) × (số bẫy trong những nước trông tốt nhất ÷ số nước trông tốt nhất)</p>
+  <p>s là tỉ lệ bấm không nghĩ. "Trông tốt nhất" là những nước mà nhìn trước được bao nhiêu lượt thì thấy thắng, hoặc ít nhất không thấy thua. Với cá chưa thấy, người chơi cân nhắc mọi khả năng màu khớp với những gì đã thấy.</p>
+  <p>Thắng ngay lần đầu = tích các (1 − r) qua từng lượt. Mỗi lượt lại tùy vào người chơi đang đứng ở đâu, nên tool lấy trung bình trên nhiều đường người chơi có thể đi (mỗi đường chọn nước theo đúng xác suất người chơi chọn). Số ± là sai số: 95% số lần, con số thật nằm trong khoảng đó. Tool tính tới khi sai số của người chơi thường còn ±2%.</p>
+  <p>Số lần chơi ≈ 1 + (1 − thắng lần đầu) ÷ (thắng khi đã biết hết cá ẩn).</p>
+
+  <h4>Người chơi mẫu</h4>
   <table>
-    <tr><th>Dòng</th><th>Ý nghĩa, dùng để làm gì</th></tr>
-    <tr><td>Xếp hạng</td><td><b>Dễ</b>, <b>Vừa</b>, <b>Khó</b>, <b>Rất khó</b>, tính theo tỉ lệ người chơi thường thắng ngay lần đầu (từ 90%, 70%, 40%, dưới 40%), kèm số lần chơi trung bình tới khi thắng. "Người chơi thường" nhìn trước 1 lượt (biết lượt bấm này cá đi đâu, nước có tràn không) nhưng 30% số lần bấm mà không nghĩ. Dùng xếp hạng này để sắp nhịp dễ khó giữa các level.</td></tr>
-    <tr><td>Từng người chơi mẫu</td><td>Bấm ngẫu nhiên: level có dễ thở không. Cẩn thận (nhìn 1 lượt) và Giỏi (nhìn 2 lượt): người chơi kỹ có bị chặn không. Nếu level có cá đen thì có thêm người chơi thường đã biết hết màu cá đen; chênh lệch so với người chưa biết cho thấy việc nhớ cá đen có tác dụng tới đâu.</td></tr>
-    <tr><td>Bẫy</td><td>Bao nhiêu phần trăm nước đi làm mất đường thắng, và bẫy lộ ra lúc nào: thua ngay, thua sau 1 lượt, hay sau vài lượt. Bẫy thua ngay thì người chơi chỉ cần tính một lượt là tránh được; bẫy lộ ra muộn thì người chơi phải nhìn xa hơn, nên khó hơn.</td></tr>
-    <tr><td>Nước</td><td>Lúc nước chật nhất, đường thắng thoáng nhất vẫn còn trống bao nhiêu chỗ cá. Còn 0–2 chỗ là level chật.</td></tr>
-    <tr><td>Chỗ hay thua</td><td>Lượt và hộp mà người chơi thường hay bấm rồi thua nhất, kèm số lần thua trên tổng số ván thử. Bấm vào dòng đó thì hộp được chọn trên map.</td></tr>
-    <tr><td>Bẫy trên một đường thắng</td><td>Đi theo một cách thắng, ở mỗi lượt có bẫy thì tool ghi nên bấm hộp nào, bấm những hộp nào là thua, và nước còn bao nhiêu chỗ.</td></tr>
+    <tr><th>Kiểu</th><th>Nhìn trước</th><th>Bấm không nghĩ</th><th>Cho biết</th></tr>
+    <tr><td>Thường</td><td>1 lượt</td><td>30%</td><td>Dùng để xếp hạng level.</td></tr>
+    <tr><td>Bấm bừa</td><td>không</td><td>100%</td><td>Level có dễ thở không.</td></tr>
+    <tr><td>Cẩn thận</td><td>1 lượt</td><td>0%</td><td>Còn thua thì là vì bẫy lộ muộn hoặc cá ẩn.</td></tr>
+    <tr><td>Giỏi</td><td>2 lượt</td><td>0%</td><td>Người chơi kỹ có bị chặn không.</td></tr>
   </table>
-  <p>Tool tính với giả định cá vào hộp ngay, theo thứ tự đón trên vòng nước; tool không tính thời gian cá bơi. Level quá lớn thì tool có thể dừng giữa chừng để tool web khỏi hết bộ nhớ: dòng cuối sẽ ghi "Dừng", và các số đã hiện vẫn dùng được.</p>
+
+  <h4>Đọc bảng</h4>
+  <table>
+    <tr><th>Phần</th><th>Ý nghĩa, dùng để làm gì</th></tr>
+    <tr><td>Xếp hạng</td><td><b>Dễ</b> từ 90%, <b>Vừa</b> từ 70%, <b>Khó</b> từ 40%, dưới nữa <b>Rất khó</b>, theo thắng lần đầu của người chơi thường; kèm số lần chơi trung bình. Thanh màu bên dưới cho thấy level đứng ở đâu. Dùng để sắp nhịp dễ khó giữa các level.</td></tr>
+    <tr><td>Kiểu người chơi</td><td>Thanh thắng lần đầu của từng kiểu. Level có cá ẩn thì có thêm vạch trắng: thắng khi đã biết hết cá ẩn.</td></tr>
+    <tr><td>Ẩn</td><td>Số cặp cá đen và cá dưới nắp, tấm phủ; chưa biết làm mất bao nhiêu % thắng lần đầu; ngã rẽ mù ở lượt nào.</td></tr>
+    <tr><td>Bẫy</td><td>Bao nhiêu phần trăm nước đi là bẫy, và bẫy lộ ra lúc nào: thua ngay, sau 1 lượt, sau 2–6 lượt, hay xa hơn.</td></tr>
+    <tr><td>Nước lúc chật nhất</td><td>Đường thắng thoáng nhất vẫn còn trống bao nhiêu chỗ cá lúc nước chật nhất. Còn 0–2 chỗ là level chật.</td></tr>
+    <tr><td>Đường đi dễ gặp nhất</td><td>Mỗi ô là một lượt, ghi hộp nên bấm, tô màu theo xác suất thua ở lượt đó (xanh là an toàn, đỏ là từ 10% trở lên). Chấm trắng trên ô là ngã rẽ mù. Cột xanh dưới ô là nước còn trống. Bấm một ô để xem bẫy ở lượt đó; trên map, hộp nên bấm có vòng xanh lá, các bẫy có vòng cam.</td></tr>
+    <tr><td>Chỗ hay thua</td><td>Lượt và hộp mà người chơi thường hay thua lần đầu nhất, kèm phần trăm số ván. Trên map, hộp hay làm thua có vòng đỏ, càng đậm càng hay thua. Bấm một dòng để chọn hộp đó.</td></tr>
+  </table>
+
+  <h4>Độ tin cậy và giới hạn</h4>
+  <p>Cách tính được đối chiếu với việc cho người chơi mẫu chơi thật 1000 ván trên các level hiện có: hai bên khớp trong phạm vi sai số. Những gì tool không tính: thời gian cá bơi (tool coi như cá vào hộp ngay, theo thứ tự đón trên vòng nước), booster, và mức "30% bấm không nghĩ" chưa được chỉnh theo số liệu người chơi thật; khi có tỉ lệ thắng thật của từng level thì nên chỉnh lại con số này. Level quá lớn thì tool có thể dừng giữa chừng để tool web khỏi hết bộ nhớ: dòng cuối ghi "Dừng", các số đã hiện vẫn dùng được.</p>
 
   <h2 id="play">8. Chơi thử</h2>
   <p><span class="btn">► Chơi thử</span> chạy level y như trong game, khung điện thoại đứng giữa trang. Không có nút tạm dừng của game: <span class="btn">Chơi lại</span> chơi lại từ đầu bất cứ lúc nào, <span class="btn">◄ Quay lại sửa</span> trở về màn sửa, <span class="btn">Level sau: … ►</span> chuyển sang chơi thử ngay level kế tiếp trong danh sách (nút ghi tên level đó, không có khi đang ở level cuối; level kế tiếp chưa có vòng nước thì mở nó ở màn sửa). Hết màn thì hiện Thắng hoặc Thua.</p>
