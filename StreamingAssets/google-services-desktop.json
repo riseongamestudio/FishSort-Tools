@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184807044241",
+    "project_id": "fish-sort-riseon",
+    "storage_bucket": "fish-sort-riseon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184807044241:android:451d1284a90573c335fb30",
+        "android_client_info": {
+          "package_name": "com.riseon.fishsort"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-SR-HgldoN_blxQ87LvB11n78XaXaLpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
