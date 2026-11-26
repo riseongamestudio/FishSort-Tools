@@ -1,10 +1,11 @@
 <linker>
   <assembly fullname="RiseOn.FishSort, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-    <type fullname="RiseOn.FishSort.AvatarView" preserve="all" />
     <type fullname="RiseOn.FishSort.Dimmed" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupBuyBooster" preserve="all" />
+    <type fullname="RiseOn.FishSort.PopupCards" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupCollection" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupConfirm" preserve="all" />
+    <type fullname="RiseOn.FishSort.PopupDailyLevel" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupDailyReward" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupHearts" preserve="all" />
     <type fullname="RiseOn.FishSort.PopupLose" preserve="all" />
@@ -25,22 +26,28 @@
     <type fullname="RiseOn.FishSort.ScreenLevels" preserve="all" />
     <type fullname="RiseOn.FishSort.SharedBar" preserve="all" />
     <type fullname="RiseOn.FishSort.TextWave" preserve="all" />
+    <type fullname="RiseOn.FishSort.Tutorial" preserve="all" />
     <type fullname="RiseOn.FishSort.UiBurst" preserve="all" />
     <type fullname="RiseOn.FishSort.UiConfetti" preserve="all" />
     <type fullname="RiseOn.FishSort.UiFit" preserve="all" />
     <type fullname="RiseOn.FishSort.UiFloat" preserve="all" />
+    <type fullname="RiseOn.FishSort.UiFrame" preserve="all" />
     <type fullname="RiseOn.FishSort.UiIdle" preserve="all" />
     <type fullname="RiseOn.FishSort.UiPulse" preserve="all" />
     <type fullname="RiseOn.FishSort.UiPush" preserve="all" />
     <type fullname="RiseOn.FishSort.UiScroll" preserve="all" />
     <type fullname="RiseOn.FishSort.UiShine" preserve="all" />
     <type fullname="RiseOn.FishSort.UiSpin" preserve="all" />
+    <type fullname="RiseOn.FishSort.UiSpotlight" preserve="all" />
     <type fullname="RiseOn.FishSort.UiToggle" preserve="all" />
     <type fullname="RiseOn.FishSort.WheelPointer" preserve="all" />
     <type fullname="RiseOn.FishSort.WheelSectors" preserve="all" />
     <type fullname="RiseOn.FishSort.WheelView" preserve="all" />
     <type fullname="RiseOn.FishSort.BoosterButton" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupCollection/Card" preserve="nothing" serialized="true" />
+    <type fullname="RiseOn.FishSort.PopupCollection/Pack" preserve="nothing" serialized="true" />
+    <type fullname="RiseOn.FishSort.PopupDailyLevel/Day" preserve="nothing" serialized="true" />
+    <type fullname="RiseOn.FishSort.PopupDailyLevel/Milestone" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupDailyReward/Tile" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupMissions/Row" preserve="nothing" serialized="true" />
     <type fullname="RiseOn.FishSort.PopupSettings/Switch" preserve="nothing" serialized="true" />
@@ -63,18 +70,12 @@
   <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
     <type fullname="TMPro.TMP_FontAsset" preserve="all" />
-    <type fullname="TMPro.TMP_InputField" preserve="all" />
     <type fullname="TMPro.FaceInfo_Legacy" preserve="nothing" serialized="true" />
     <type fullname="TMPro.FontAssetCreationSettings" preserve="nothing" serialized="true" />
     <type fullname="TMPro.KerningTable" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_Character" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_FontFeatureTable" preserve="nothing" serialized="true" />
     <type fullname="TMPro.TMP_FontWeightPair" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_InputField/OnChangeEvent" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_InputField/SelectionEvent" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_InputField/SubmitEvent" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_InputField/TextSelectionEvent" preserve="nothing" serialized="true" />
-    <type fullname="TMPro.TMP_InputField/TouchScreenKeyboardEvent" preserve="nothing" serialized="true" />
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -93,8 +94,8 @@
   </assembly>
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.UI.Button" preserve="all" />
+    <type fullname="UnityEngine.UI.GraphicRaycaster" preserve="all" />
     <type fullname="UnityEngine.UI.Image" preserve="all" />
-    <type fullname="UnityEngine.UI.LayoutElement" preserve="all" />
     <type fullname="UnityEngine.UI.Mask" preserve="all" />
     <type fullname="UnityEngine.UI.RawImage" preserve="all" />
     <type fullname="UnityEngine.UI.RectMask2D" preserve="all" />
@@ -108,6 +109,7 @@
     <type fullname="UnityEngine.UI.SpriteState" preserve="nothing" serialized="true" />
   </assembly>
   <assembly fullname="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.Canvas" preserve="all" />
     <type fullname="UnityEngine.CanvasGroup" preserve="all" />
     <type fullname="UnityEngine.CanvasRenderer" preserve="all" />
   </assembly>
